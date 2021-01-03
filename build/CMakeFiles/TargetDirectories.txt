@@ -1,7 +1,0 @@
-/data/git/test/build/CMakeFiles/edit_cache.dir
-/data/git/test/build/CMakeFiles/rebuild_cache.dir
-/data/git/test/build/modules/CMakeFiles/edit_cache.dir
-/data/git/test/build/modules/CMakeFiles/rebuild_cache.dir
-/data/git/test/build/modules/smooth/CMakeFiles/edit_cache.dir
-/data/git/test/build/modules/smooth/CMakeFiles/rebuild_cache.dir
-/data/git/test/build/modules/smooth/CMakeFiles/smooth.dir

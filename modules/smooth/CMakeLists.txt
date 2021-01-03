@@ -14,7 +14,5 @@ FILE(GLOB_RECURSE PROJECT_SOURCES  "src/*.cpp")
 #生成可执行文件
 ADD_EXECUTABLE(${PROJECT_NAME} main.cpp ${PROJECT_SOURCES}  ${PROJECT_HEADERS})
 
-# LINK_DIRECTORIES(/usr/local/lib)
 # Link the OSQP shared library
 target_link_libraries(${PROJECT_NAME} PRIVATE osqp::osqp)
-# target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/lib/libosqp.so)
