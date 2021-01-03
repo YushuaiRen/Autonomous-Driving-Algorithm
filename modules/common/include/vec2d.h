@@ -1,6 +1,7 @@
 /**
  * @file
  * @brief Defines the Vec2d class.
+ * @ref apollo
  */
 
 #pragma once
