@@ -1,6 +1,11 @@
+#include <iostream>
+
 #include "osqp/osqp.h"
+#include "modules/common/include/vec2d.h"
 
 int main(int argc, char **argv) {
+    common::math::Vec2d p(1,2);
+    std::cout << p.x() << " " << p.y() << std::endl;
     // Load problem data
     c_float P_x[3] = {4.0, 1.0, 2.0, };
     c_float P_x_new[3] = {5.0, 1.5, 1.0, };

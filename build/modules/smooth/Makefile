@@ -152,6 +152,33 @@ main.cpp.s:
 	cd /data/git/test/build && $(MAKE) -f modules/smooth/CMakeFiles/smooth.dir/build.make modules/smooth/CMakeFiles/smooth.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/fem_pos_deviation_osqp.o: src/fem_pos_deviation_osqp.cpp.o
+
+.PHONY : src/fem_pos_deviation_osqp.o
+
+# target to build an object file
+src/fem_pos_deviation_osqp.cpp.o:
+	cd /data/git/test/build && $(MAKE) -f modules/smooth/CMakeFiles/smooth.dir/build.make modules/smooth/CMakeFiles/smooth.dir/src/fem_pos_deviation_osqp.cpp.o
+.PHONY : src/fem_pos_deviation_osqp.cpp.o
+
+src/fem_pos_deviation_osqp.i: src/fem_pos_deviation_osqp.cpp.i
+
+.PHONY : src/fem_pos_deviation_osqp.i
+
+# target to preprocess a source file
+src/fem_pos_deviation_osqp.cpp.i:
+	cd /data/git/test/build && $(MAKE) -f modules/smooth/CMakeFiles/smooth.dir/build.make modules/smooth/CMakeFiles/smooth.dir/src/fem_pos_deviation_osqp.cpp.i
+.PHONY : src/fem_pos_deviation_osqp.cpp.i
+
+src/fem_pos_deviation_osqp.s: src/fem_pos_deviation_osqp.cpp.s
+
+.PHONY : src/fem_pos_deviation_osqp.s
+
+# target to generate assembly for a file
+src/fem_pos_deviation_osqp.cpp.s:
+	cd /data/git/test/build && $(MAKE) -f modules/smooth/CMakeFiles/smooth.dir/build.make modules/smooth/CMakeFiles/smooth.dir/src/fem_pos_deviation_osqp.cpp.s
+.PHONY : src/fem_pos_deviation_osqp.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -164,6 +191,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/fem_pos_deviation_osqp.o"
+	@echo "... src/fem_pos_deviation_osqp.i"
+	@echo "... src/fem_pos_deviation_osqp.s"
 .PHONY : help
 
 

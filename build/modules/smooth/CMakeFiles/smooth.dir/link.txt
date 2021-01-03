@@ -1,1 +1,1 @@
-/usr/bin/c++      CMakeFiles/smooth.dir/main.cpp.o  -o ../../../bin/smooth -rdynamic /usr/local/lib/libosqp.so -Wl,-rpath,/usr/local/lib 
+/usr/bin/c++      CMakeFiles/smooth.dir/main.cpp.o CMakeFiles/smooth.dir/src/fem_pos_deviation_osqp.cpp.o  -o ../../../bin/smooth -rdynamic /usr/local/lib/libosqp.so -Wl,-rpath,/usr/local/lib 

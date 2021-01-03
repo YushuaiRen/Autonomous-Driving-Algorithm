@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/data/git/test -I/data/git/test/modules/smooth/include -isystem /usr/local/include/osqp 
+CXX_INCLUDES = -I/data/git/test -I/data/git/test/modules/smooth/include -I/data/git/test/modules -isystem /usr/local/include/osqp 
 

@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/smooth.dir/main.cpp.o"
+  "CMakeFiles/smooth.dir/src/fem_pos_deviation_osqp.cpp.o"
   "../../../bin/smooth.pdb"
   "../../../bin/smooth"
 )

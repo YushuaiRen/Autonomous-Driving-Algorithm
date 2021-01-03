@@ -1,2 +1,2 @@
 # 路径平滑
-- minisnap
+- fem_pos_deviation_osqp

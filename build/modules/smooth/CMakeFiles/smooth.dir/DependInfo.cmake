@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/data/git/test/modules/smooth/main.cpp" "/data/git/test/build/modules/smooth/CMakeFiles/smooth.dir/main.cpp.o"
+  "/data/git/test/modules/smooth/src/fem_pos_deviation_osqp.cpp" "/data/git/test/build/modules/smooth/CMakeFiles/smooth.dir/src/fem_pos_deviation_osqp.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -12,6 +13,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../"
   "../modules/smooth/include"
+  "../modules"
   "/usr/local/include/osqp"
   )
 

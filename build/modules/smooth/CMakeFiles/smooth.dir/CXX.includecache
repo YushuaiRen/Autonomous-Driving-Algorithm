@@ -6,7 +6,33 @@
 
 #IncludeRegexTransform: 
 
+..//modules/common/include/vec2d.h
+cmath
+-
+string
+-
+
+../modules/smooth/include/fem_pos_deviation_osqp.h
+iostream
+-
+utility
+-
+vector
+-
+osqp/osqp.h
+../modules/smooth/include/osqp/osqp.h
+
 /data/git/test/modules/smooth/main.cpp
+iostream
+-
 osqp/osqp.h
 /data/git/test/modules/smooth/osqp/osqp.h
+modules/common/include/vec2d.h
+/data/git/test/modules/smooth/modules/common/include/vec2d.h
+
+/data/git/test/modules/smooth/src/fem_pos_deviation_osqp.cpp
+fem_pos_deviation_osqp.h
+/data/git/test/modules/smooth/src/fem_pos_deviation_osqp.h
+limits
+-
 
