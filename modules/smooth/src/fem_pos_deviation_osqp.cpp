@@ -1,5 +1,5 @@
 
-#include "fem_pos_deviation_osqp.h"
+#include "modules/smooth/include/fem_pos_deviation_osqp.h"
 
 #include <limits>
 
