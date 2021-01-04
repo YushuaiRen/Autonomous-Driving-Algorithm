@@ -1,11 +1,68 @@
 #include <iostream>
+#include <vector>
+#include <cmath>
+#include <Eigen/Dense>
+
+#include<opencv2/opencv.hpp>
+#include<opencv2/core/core.hpp>
+#include<opencv2/highgui/highgui.hpp>
 
 #include "osqp/osqp.h"
 #include "modules/common/include/vec2d.h"
 
+
+cv::Point2i cv_offset(
+    float x, float y, int image_width=2000, int image_height=2000){
+  cv::Point2i output;
+  output.x = int(x * 100) + 300;
+  output.y = image_height - int(y * 100) - image_height/2;
+  return output;
+};
+
 int main(int argc, char **argv) {
+
+
+    const int num = 10;
+    const double low = 0;
+    const double high = 2 * M_PI;
+
+    Eigen::VectorXd px = Eigen::VectorXd::LinSpaced(num, low, high);
+    std::vector
+    for(int i = 0; i < num; i++) {
+        std::cout << px[i] << " " << sin(px[i]) << std::endl;
+
+    }
+
+
+  cv::namedWindow("test", cv::WINDOW_NORMAL);
+  int count = 0;
+
+
+  cv::Mat bg(2000, 2000, CV_8UC3, cv::Scalar(255, 255, 255));
+  for(unsigned int i=1; i<cx.size(); i++){
+    cv::line(
+      bg,
+      cv_offset(cx[i-1], cy[i-1], bg.cols, bg.rows),
+      cv_offset(cx[i], cy[i], bg.cols, bg.rows),
+      cv::Scalar(0, 0, 0),
+      10);
+  }
+
+    //save image in build/bin/pngs
+    // struct timeval tp;
+    // gettimeofday(&tp, NULL);
+    // long int ms = tp.tv_sec * 1000 + tp.tv_usec / 1000;
+    // std::string int_count = std::to_string(ms);
+    // cv::imwrite("./pngs/"+int_count+".png", bg);
+    cv::imshow("test", bg);
+    cv::waitKey(5);
+
     common::math::Vec2d p(1,2);
     std::cout << p.x() << " " << p.y() << std::endl;
+
+    std::vector<std::pair<double, double>> raw_point2d;
+
+
     // Load problem data
     c_float P_x[3] = {4.0, 1.0, 2.0, };
     c_float P_x_new[3] = {5.0, 1.5, 1.0, };
