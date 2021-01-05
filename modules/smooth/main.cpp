@@ -1,132 +1,65 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <random>
 #include <Eigen/Dense>
 
-#include<opencv2/opencv.hpp>
-#include<opencv2/core/core.hpp>
-#include<opencv2/highgui/highgui.hpp>
+#include "matplotlibcpp.h"
 
 #include "osqp/osqp.h"
 #include "modules/common/include/vec2d.h"
+#include "modules/smooth/include/fem_pos_deviation.h"
 
-
-cv::Point2i cv_offset(
-    float x, float y, int image_width=2000, int image_height=2000){
-  cv::Point2i output;
-  output.x = int(x * 100) + 300;
-  output.y = image_height - int(y * 100) - image_height/2;
-  return output;
-};
+using namespace planning;
+namespace plt = matplotlibcpp;
 
 int main(int argc, char **argv) {
 
-
-    const int num = 10;
+    const int num = 100;
     const double low = 0;
     const double high = 2 * M_PI;
 
     Eigen::VectorXd px = Eigen::VectorXd::LinSpaced(num, low, high);
-    std::vector
-    for(int i = 0; i < num; i++) {
-        std::cout << px[i] << " " << sin(px[i]) << std::endl;
+    
+    std::vector<double> sinx(num, 0);
+    std::vector<double> siny(num, 0);
+    std::vector<double> randomx(num, 0);
+    std::vector<double> randomy(num, 0);
 
+    std::vector<std::pair<double, double>> raw_point2d(num, {0.0, 0.0});
+    const double lateral_bound = 0.1;
+    std::vector<double> bounds(num, lateral_bound);
+
+    bounds.front() = 0.0;
+    bounds.back() = 0.0;
+
+    std::random_device rd;
+    std::default_random_engine gen = std::default_random_engine(rd());
+    std::normal_distribution<> dis{0, 0.05};
+    for (int i = 0; i < num; ++i) {
+        raw_point2d[i].first = px[i];
+        raw_point2d[i].second = std::sin(px[i]) + dis(gen);
+        randomx[i] = px[i];
+        randomy[i] = std::sin(px[i]) + dis(gen);
+        sinx[i] = px[i];
+        siny[i] = std::sin(px[i]);
     }
+    
+    FemPosDeviation test;
+    test.set_ref_points(raw_point2d);
+    test.set_bounds_around_refs(bounds);
+
+    test.Solve();
+    
+    std::vector<double> opt_x = test.opt_x();
+    std::vector<double> opt_y = test.opt_y();
+
+    plt::plot(sinx, siny);
+    plt::plot(randomx, randomy);
+    plt::plot(opt_x, opt_y);
+    plt::grid(true);
+    plt::show();
 
 
-  cv::namedWindow("test", cv::WINDOW_NORMAL);
-  int count = 0;
-
-
-  cv::Mat bg(2000, 2000, CV_8UC3, cv::Scalar(255, 255, 255));
-  for(unsigned int i=1; i<cx.size(); i++){
-    cv::line(
-      bg,
-      cv_offset(cx[i-1], cy[i-1], bg.cols, bg.rows),
-      cv_offset(cx[i], cy[i], bg.cols, bg.rows),
-      cv::Scalar(0, 0, 0),
-      10);
-  }
-
-    //save image in build/bin/pngs
-    // struct timeval tp;
-    // gettimeofday(&tp, NULL);
-    // long int ms = tp.tv_sec * 1000 + tp.tv_usec / 1000;
-    // std::string int_count = std::to_string(ms);
-    // cv::imwrite("./pngs/"+int_count+".png", bg);
-    cv::imshow("test", bg);
-    cv::waitKey(5);
-
-    common::math::Vec2d p(1,2);
-    std::cout << p.x() << " " << p.y() << std::endl;
-
-    std::vector<std::pair<double, double>> raw_point2d;
-
-
-    // Load problem data
-    c_float P_x[3] = {4.0, 1.0, 2.0, };
-    c_float P_x_new[3] = {5.0, 1.5, 1.0, };
-    c_int P_nnz = 3;
-    c_int P_i[3] = {0, 0, 1, };
-    c_int P_p[3] = {0, 1, 3, };
-    c_float q[2] = {1.0, 1.0, };
-    c_float q_new[2] = {2.0, 3.0, };
-    c_float A_x[4] = {1.0, 1.0, 1.0, 1.0, };
-    c_float A_x_new[4] = {1.2, 1.5, 1.1, 0.8, };
-    c_int A_nnz = 4;
-    c_int A_i[4] = {0, 1, 0, 2, };
-    c_int A_p[3] = {0, 2, 4, };
-    c_float l[3] = {1.0, 0.0, 0.0, };
-    c_float l_new[3] = {2.0, -1.0, -1.0, };
-    c_float u[3] = {1.0, 0.7, 0.7, };
-    c_float u_new[3] = {2.0, 2.5, 2.5, };
-    c_int n = 2;
-    c_int m = 3;
-
-    // Exitflag
-    c_int exitflag = 0;
-
-    // Workspace structures
-    OSQPWorkspace *work;
-    OSQPSettings  *settings = (OSQPSettings *)c_malloc(sizeof(OSQPSettings));
-    OSQPData      *data     = (OSQPData *)c_malloc(sizeof(OSQPData));
-
-    // Populate data
-    if (data) {
-        data = (OSQPData *)c_malloc(sizeof(OSQPData));
-        data->n = n;
-        data->m = m;
-        data->P = csc_matrix(data->n, data->n, P_nnz, P_x, P_i, P_p);
-        data->q = q;
-        data->A = csc_matrix(data->m, data->n, A_nnz, A_x, A_i, A_p);
-        data->l = l;
-        data->u = u;
-    }
-
-    // Define Solver settings as default
-    if (settings) osqp_set_default_settings(settings);
-
-    // Setup workspace
-    exitflag = osqp_setup(&work, data, settings);
-
-    // Solve problem
-    osqp_solve(work);
-
-    // Update problem
-    // NB: Update only upper triangular part of P
-    osqp_update_P(work, P_x_new, OSQP_NULL, 3);
-    osqp_update_A(work, A_x_new, OSQP_NULL, 4);
-
-    // Solve updated problem
-    osqp_solve(work);
-
-    // Cleanup
-    if (data) {
-        if (data->A) c_free(data->A);
-        if (data->P) c_free(data->P);
-        c_free(data);
-    }
-    if (settings) c_free(settings);
-
-    return exitflag;
+    return 0;
 };
