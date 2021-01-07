@@ -15,6 +15,19 @@ using namespace planning;
 namespace plt = matplotlibcpp;
 
 int main(int argc, char **argv) {
+    std::vector<std::vector<std::pair<int, float>>> columns;
+    columns.resize(10);
+  
+    for (int i = 0; i < 10; ++i) {
+      columns[i].emplace_back(i, 1.0);
+    }
+
+    for (int i = 0; i < 10; ++i) {
+        std::cout << columns[i].size() << std:: endl;
+        for (auto x : columns[i]) {
+            std::cout << x.first << " " << x.second << std::endl; 
+        }
+    }
 
     const int num = 100;
     const double low = 0;
